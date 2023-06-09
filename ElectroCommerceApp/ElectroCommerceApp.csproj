@@ -25,8 +25,4 @@
     <ProjectReference Include="..\ElectroCommerce.DataAccess\ElectroCommerce.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Identity\Data\" />
-  </ItemGroup>
-
 </Project>

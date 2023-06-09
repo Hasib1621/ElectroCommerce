@@ -24,6 +24,17 @@ namespace ElectroCommerceApp.Area.Customer.Controllers
             return View(products);
         }
 
+        public IActionResult Details(int productId)
+        {
+            ShoppingCart shoppingCart = new()
+            {
+                ProductId = productId,
+                Product = _unitOfWork.Product.Get(u=>u.Id == productId, includeProperties:"Category,ProductImages"),
+                Count = 1
+            };
+            return View(shoppingCart);
+        }
+
         public IActionResult Privacy()
         {
             return View();
