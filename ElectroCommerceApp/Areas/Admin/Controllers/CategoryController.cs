@@ -1,10 +1,13 @@
 ﻿using ElectroCommerce.DataAccess.Repository.IRepository;
 using ElectroCommerce.Models;
+using ElectroCommerce.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectroCommerceApp.Area.Admin
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

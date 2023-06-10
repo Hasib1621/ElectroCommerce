@@ -24,11 +24,18 @@ namespace ElectroCommerce.DataAccess.Data
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+		public DbSet<OrderDetail> OrderDetails { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder builder)
+		protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Company>().HasData(
+                new Company { Id = 1, Name = "Euro Bangla iT", StreetAddress = "123 Adidas St", City = "New York", PostalCode = "12121", State = "IL", PhoneNumber = "01737281939" },
+                new Company { Id = 2, Name = "Pondit Limited", StreetAddress = "123 Nike St", City = "New York City", PostalCode = "12121", State = "INL", PhoneNumber = "01977281939" },
+                new Company { Id = 3, Name = "4M Design", StreetAddress = "123 Puma St", City = "Delhi", PostalCode = "1216", State = "IND", PhoneNumber = "01583945939" }
+                );
             builder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Mobile Phones",Description= "Explore a wide range of cutting-edge mobile phones that keep you connected on the go. Discover sleek designs, vibrant displays, powerful processors, and advanced camera systems to capture every moment with clarity. Choose from top brands and experience the latest features and innovations in mobile technology.", DisplayOrder = 1 },
                 new Category { Id = 2, Name = "Laptops and Notebooks", Description= "Discover a collection of high-performance laptops and notebooks designed to meet your computing needs. From lightweight and portable models for students and professionals on the move to powerhouse machines for gamers and content creators, our selection offers a variety of options. Enjoy seamless multitasking, stunning displays, and powerful processors for an optimized computing experience.", DisplayOrder = 2 },
