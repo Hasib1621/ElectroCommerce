@@ -1,0 +1,137 @@
+﻿@model DashboardVM
+<div class="container-fluid">
+    <div class="row m-0">
+        <div class="col-md-2 py-3" >
+            <h2 style="text-align:center;background-color:cyan"> Graphs And Reports</h2>
+            <div class="py-3">
+                <a asp-action="CategoryWiseChart" class="btn btn-primary m-10" style="width:200px">Category Wise Graph</a>
+            </div>
+            <div class="py-3">
+                <a asp-action="ProductWiseChart" class="btn btn-primary" style="width:200px">Product Wise Graph</a>
+            </div>
+            <div class="py-3">
+                <a asp-action="EarningPerDay" class="btn btn-primary m-10" style="width:200px">Earning Per Day</a>
+            </div>
+            <div class="py-3">
+                <a asp-action="SaleReport" class="btn btn-primary m-10" style="width:200px">Sale Report</a>
+            </div>
+            
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                        <div class="card-header"><h3>Total Sale Today</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4>@DateTime.Now.ToString("d MMMM, yyyy") </h4>
+                                    <h1 class="card-title"><i class="bi bi-receipt"></i> @Model.TotalOrderToday</h1>
+                                </div>
+                                <div class="col-md-3">
+                                    <i class="bi bi-shop" style="font-size:55px; padding:0px 4px; color:white; "></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                        <div class="card-header"><h3>Total Products</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4>@DateTime.Now.ToString("d MMMM, yyyy") </h4>
+                                    <h1 class="card-title"><i class="bi bi-basket-fill"></i> @Model.TotalProducts</h1>
+                                </div>
+                                <div class="col-md-3">
+                                    <i class="bi bi-shop" style="font-size:55px; padding:0px 4px; color:white; "></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                        <div class="card-header"><h3>Total Customers</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4>@DateTime.Now.ToString("d MMMM, yyyy") </h4>
+                                    <h1 class="card-title"><i class="bi bi-people"></i> @Model.TotalCustomers</h1>
+                                </div>
+                                <div class="col-md-3">
+                                    <i class="bi bi-shop" style="font-size:55px; padding:0px 4px; color:white; "></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                        <div class="card-header"><h3>Top Product</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4>@DateTime.Now.ToString("d MMMM, yyyy") </h4>
+                                    <h4 class="card-title"><i class="bi bi-star"></i> @Model.TopProduct</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <i class="bi bi-shop" style="font-size:55px; padding:0px 4px; color:white; "></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                        <div class="card-header"><h3>Top Customer</h3></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4>@DateTime.Now.ToString("d MMMM, yyyy") </h4>
+                                    <h4 class="card-title"><i class="bi bi-star-fill"></i> @Model.TopCustomer</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <i class="bi bi-shop" style="font-size:55px; padding:0px 4px; color:white; "></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                        <div class="card-body">
+                            <div class="col-md-9 mb-2">
+                                <div>
+                                    <a style="text-decoration:none; color:white; font-size:18px;" asp-area="Admin" asp-controller="Order" asp-action="Index" asp-route-status="all">All</a>
+                                </div>
+                                <div>
+                                    <a style="text-decoration:none; color:white; font-size:18px;" asp-area="Admin" asp-controller="Order" asp-action="Index" asp-route-status="inprocess">In Process</a>
+                                </div>
+                                <div>
+                                    <a style="text-decoration:none; color:white; font-size:18px;" asp-area="Admin" asp-controller="Order" asp-action="Index" asp-route-status="pending">Payment Pending</a>
+                                </div>
+                                <div>
+                                    <a style="text-decoration:none; color:white; font-size:18px;" asp-area="Admin" asp-controller="Order" asp-action="Index" asp-route-status="completed">Completed</a>
+                                </div>
+                                <div>
+                                    <a style="text-decoration:none; color:white; font-size:18px;" asp-area="Admin" asp-controller="Order" asp-action="Index" asp-route-status="approved">Approved</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

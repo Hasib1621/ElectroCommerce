@@ -1,0 +1,68 @@
+﻿@model IDictionary<string, int>
+
+<div class="py-3">
+    <a class="btn btn-primary m-10" style="width:200px" id="productGraphButton">Product Wise Graph</a>
+</div>
+<div>
+    <canvas id="productChartCanvas" width="400" height="100"></canvas>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script>
+    var barCanvas = document.getElementById("productChartCanvas");
+    var res = [];
+    var lab = [];
+
+    @if (Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            @:res.push(@item.Value);
+            var l = item.Key;
+            @:lab.push("@l");
+           
+        }
+       
+    }
+        var res = {
+        label: 'Total Sale',
+        data: res,
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderWidth: 0,
+        lineTension: 0,
+    };
+    console.log(lab);
+
+    
+
+    var datasetvalues = {
+        labels: lab,//x-axis label values
+        datasets: [res]//y-axis
+    };
+
+    var chartOptions = {
+        scales: {
+            xAxes: [{
+                barPercentage: 0.2,//Percent (0-1) of the available width each bar should
+
+            }],
+            yAxes: [{
+                barPercentage: 1,
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+        }
+    };
+
+    var barChart = new Chart(barCanvas, {
+        type: 'bar',
+        data: datasetvalues,
+        options: chartOptions
+    });
+
+</script>

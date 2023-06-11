@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ElectroCommerce.Utility;
 
 namespace ElectroCommerceApp.Areas.Identity.Pages.Account
 {
@@ -103,6 +104,7 @@ namespace ElectroCommerceApp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -111,9 +113,22 @@ namespace ElectroCommerceApp.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+
+                    if (user != null)
+                    {
+                        // Check the user's role
+                        var roles = await _signInManager.UserManager.GetRolesAsync(user);
+                        if (roles.Contains(SD.Role_Admin))
+                        {
+                            // Redirect to the admin page
+                            returnUrl = Url.Content("~/Admin/Dashboard"); // Replace with your admin page URL
+                        }
+                    }
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

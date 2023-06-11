@@ -1,0 +1,23 @@
+﻿@model IEnumerable<dynamic>
+
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th> <h4 class="fw-bold text-center"> Product Title </h4></th>
+                <th> <h4 class="fw-bold text-center">Count </h4></th>
+                <th> <h4 class="fw-bold text-center">Price </h4></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in Model)
+            {
+                <tr>
+                    <td>@detail.ProductTitle</td>
+                    <td>@detail.Count</td>
+                    <td>@detail.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
